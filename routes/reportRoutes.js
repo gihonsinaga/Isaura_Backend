@@ -1,9 +1,14 @@
 const express = require("express");
 const router = express.Router();
+const {
+  getAllReports,
+  createReport,
+} = require("../controllers/reportController");
 
-// Contoh route untuk laporan
-router.get("/", (req, res) => {
-  res.json({ message: "Welcome to Report API!" });
-});
+// Route untuk mendapatkan laporan berdasarkan bulan dan tahun
+router.get("/", getAllReports);
+
+// Route untuk menambahkan laporan
+router.post("/", createReport);
 
 module.exports = router;
