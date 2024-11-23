@@ -30,7 +30,7 @@ const loginAdmin = async (req, res) => {
     const token = jwt.sign(
       { id: admin.id, username: admin.username, email: admin.email },
       JWT_SECRET,
-      { expiresIn: "1h" } // Token akan kedaluwarsa dalam 1 jam
+      { expiresIn: "24h" } // Token akan kedaluwarsa dalam 24 jam
     );
 
     res.status(200).json({
