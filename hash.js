@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 
-const password = "password123"; // Password yang ingin Anda gunakan
-const saltRounds = 10; // Jumlah salt yang digunakan untuk hashing
+const password = "password123";
+const saltRounds = 10;
 
 bcrypt.hash(password, saltRounds, (err, hashedPassword) => {
   if (err) {
@@ -10,3 +10,5 @@ bcrypt.hash(password, saltRounds, (err, hashedPassword) => {
     console.log("Hashed password:", hashedPassword); // Hasil hash password
   }
 });
+
+//npx nodemon index.js
