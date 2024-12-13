@@ -33,6 +33,25 @@ const Report = {
     const result = await pool.query(query, values);
     return result.rows[0];
   },
+
+  getAllReports: async () => {
+    const query = `
+      SELECT 
+        r.id,
+        r.product_id,
+        p.product_name,
+        p.category,
+        p.price,
+        r.piece,
+        r.total_price,
+        r.created_at
+      FROM reports r
+      JOIN products p ON r.product_id = p.id
+      ORDER BY r.created_at DESC;
+    `;
+    const result = await pool.query(query);
+    return result.rows;
+  },
 };
 
 module.exports = Report;
