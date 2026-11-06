@@ -24,6 +24,6 @@ jobs:
           install -d -m 700 ~/.ssh
           printf '%s' "$DEPLOY_KEY_B64" | base64 --decode > ~/.ssh/id_isaura
           chmod 600 ~/.ssh/id_isaura
-          ssh-keyscan -H 43.163.1.208 > ~/.ssh/known_hosts
+          printf '%s\n' '43.163.1.208 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO9sp/OsDcGmq5N2x+UG5BM6tp/Vj5neq3iWmub5va6T' > ~/.ssh/known_hosts
       - name: Deploy backend
         run: ssh -i ~/.ssh/id_isaura -o BatchMode=yes -o StrictHostKeyChecking=yes nogistore@43.163.1.208 true
