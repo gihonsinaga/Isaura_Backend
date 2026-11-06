@@ -1,0 +1,29 @@
+name: Deploy Isaura Backend
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: isaura-backend-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Configure SSH key
+        env:
+          DEPLOY_KEY_B64: ${{ secrets.ISAURA_BACKEND_DEPLOY_KEY_B64 }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s' "$DEPLOY_KEY_B64" | base64 --decode > ~/.ssh/id_isaura
+          chmod 600 ~/.ssh/id_isaura
+          ssh-keyscan -H 43.163.1.208 > ~/.ssh/known_hosts
+      - name: Deploy backend
+        run: ssh -i ~/.ssh/id_isaura -o BatchMode=yes -o StrictHostKeyChecking=yes nogistore@43.163.1.208 true

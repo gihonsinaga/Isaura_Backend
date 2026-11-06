@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const pool = require("../config/db"); // Sesuaikan dengan file konfigurasi database Anda
+const authenticateAdmin = require("../middleware/authMiddleware");
+
+router.use(authenticateAdmin);
 
 // Get all products
 router.get("/", async (req, res) => {

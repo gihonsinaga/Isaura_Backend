@@ -5,6 +5,9 @@ const {
   createReport,
   getReports,
 } = require("../controllers/reportController");
+const authenticateAdmin = require("../middleware/authMiddleware");
+
+router.use(authenticateAdmin);
 
 // Route untuk mendapatkan laporan berdasarkan bulan dan tahun
 router.get("/", getAllReports);
